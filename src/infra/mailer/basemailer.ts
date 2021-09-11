@@ -1,18 +1,24 @@
-import nodemailer, { Transporter } from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
+import { createTransport, Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import hbs, { NodemailerExpressHandlebarsOptions } from 'nodemailer-express-handlebars'
+import hbs from 'nodemailer-express-handlebars'
+import { resolve } from 'path';
 
 export default abstract class BaseMailer {
-  protected transporter: Transporter
+  private transporter: Transporter<SMTPTransport.SentMessageInfo>
 
-  constructor(
-      private authConfig: SMTPTransport.Options, 
-      private compileOptions: NodemailerExpressHandlebarsOptions
-    ) {
-    this.transporter = nodemailer.createTransport(authConfig)
-    this.transporter.use('compile', hbs(compileOptions))
+  constructor(private authConfig: SMTPTransport.Options) {
+    this.transporter = createTransport(authConfig)
+    this.transporter.use('compile', hbs({
+      viewEngine: {
+        extname: '.edge',
+      },
+      viewPath: resolve(__dirname, '..', 'application', 'resources', 'views', 'mails')
+    }))
   }
 
-  abstract prepare(mail: Mail.Options): Promise<void>
+  abstract prepare(transporter: Transporter): Promise<void>
+
+  async send() {
+    await this.prepare(this.transporter)
+  }
 }
