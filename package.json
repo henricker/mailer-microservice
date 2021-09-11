@@ -1,0 +1,25 @@
+{
+  "name": "@henricker/ms-mail-sender",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node-dev --ignore-watch node_modules --transpile-only src/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.9.1",
+    "@types/nodemailer": "^6.4.4",
+    "@types/nodemailer-express-handlebars": "^4.0.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "kafkajs": "^1.15.0",
+    "nodemailer": "^6.6.3",
+    "nodemailer-express-handlebars": "^4.0.0"
+  }
+}
