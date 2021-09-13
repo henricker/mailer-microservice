@@ -1,5 +1,5 @@
 export default interface IBet {
-  type: string,
+  game: string,
   color: string,
-  numbers: number[]
+  numbers: string
 }
