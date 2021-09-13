@@ -10,7 +10,7 @@ export default abstract class BaseMailer {
     this.transporter = createTransport(authConfig)
     this.transporter.use('compile', hbs({
       viewEngine: {
-        extname: '.edge',
+        extname: '.hbs',
       },
       viewPath: resolve(__dirname, '..', 'application', 'resources', 'views', 'mails')
     }))
