@@ -4,7 +4,7 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { resolve } from "path";
 import BaseMailer from "../../infra/mailer/basemailer";
 import handlebars from 'handlebars';
-import IPayloadMailer from "./IPayloadMailer";
+import IPayloadMailer from "./interfaces/IPayloadMailer";
 
 export default class WelcomeUserMailer extends BaseMailer {
   constructor(authConfig: SMTPTransport.Options, private payload: IPayloadMailer) {    
@@ -19,14 +19,13 @@ export default class WelcomeUserMailer extends BaseMailer {
       'resources', 
       'views', 
       'mails', 
-      'welcome-user.edge'
+      'welcome-user.hbs',
     ))).toString('utf-8')
 
     const mailTemplateParse = handlebars.compile(templateFileContent)
 
     const html = mailTemplateParse({
-      name: this.payload.contact.name,
-      email: this.payload.contact.email
+      name: this.payload.contact.name
     })
 
     await transporter.sendMail({
