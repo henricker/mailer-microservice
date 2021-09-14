@@ -137,34 +137,34 @@
     font-style: normal;
   }
 </style>
-  
+
 
 <header>
-  <div class="titles title-left">
-      <h1>TGL</h1>
-  </div>
+<div class="titles title-left">
+    <h1>TGL</h1>
+</div>
 </header>
 <div class="container">
-  <main>
-    <div class="content">
-        <h2>Hi, <span class="outline-green">{{ name }}!</span>.</h2>
-        <p>The <span class="outline-green">bets</span> you made on our platform are below:</p>
-        <div class="bets">
-          {{#each bets }}
-            <div class="bet" style="border: 1px solid {{this.color}}">
-              <h2 style="color: {{this.color}}">{{this.game}}</h2>
-              <p>{{this.numbers}}</p>
-            </div>
-          {{/each}}
-        </div>
-        <h2 class="price">Total price: <span class="outline-green">{{totalPrice}}</span></h2>
-    </div>
-    <div class="subcontent">
-        <p>Click bellow to place new bets, good luck! ;)</p>
-        <a href="https://tgl-bets.com/dashboard">
-          <button>New bets -></button>
-        <a/>
-    </div>
-  </main>
+<main>
+  <div class="content">
+      <h2>Hi, <span class="outline-green">{{ name }}!</span>.</h2>
+      <p>The <span class="outline-green">bets</span> you made on our platform are below:</p>
+      <div class="bets">
+        {{#each bets }}
+          <div class="bet" style="border: 1px solid {{this.color}}">
+            <h2 style="color: {{this.color}}">{{this.game}}</h2>
+            <p>{{this.numbers}}</p>
+          </div>
+        {{/each}}
+      </div>
+      <h2 class="price">Total price: <span class="outline-green">{{totalPrice}}</span></h2>
+  </div>
+  <div class="subcontent">
+      <p>Click bellow to place new bets, good luck! ;)</p>
+      <a href="https://tgl-bets.com/dashboard">
+        <button>New bets -></button>
+      <a/>
+  </div>
+</main>
   <footer>Copyright 2020 Luby Software</footer>
 </div>
