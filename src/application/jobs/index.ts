@@ -1,0 +1,1 @@
+export { default as MailerJob } from './mailer-job'
