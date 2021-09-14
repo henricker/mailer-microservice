@@ -1,30 +1,24 @@
-import kafka from "./kafka";
 import { Consumer as KafkaConsumer, ConsumerSubscribeTopic, Message } from 'kafkajs'
-import { consumerConfig } from "../config/kafka/kafka.consumer.config";
 
-class Consumer {
-  private consumer: KafkaConsumer
-  constructor() {
-    this.consumer = kafka.consumer(consumerConfig)
-  }
+export default class Consumer {
+
+  constructor(private kafkaConsumer: KafkaConsumer) {}
 
   async connect(): Promise<void> {
-    await this.consumer.connect()
+    await this.kafkaConsumer.connect()
   }
 
   async disconnect(): Promise<void> {
-    await this.consumer.disconnect()
+    await this.kafkaConsumer.disconnect()
   }
 
   async subscribe(topics: ConsumerSubscribeTopic[]): Promise<void> {
-    topics.forEach(async (options) => await this.consumer.subscribe({ ...options  }))
+    topics.forEach(async (options) => await this.kafkaConsumer.subscribe({ ...options  }))
   }
 
   async run(handle: Function) {
-    await this.consumer.run({
+    await this.kafkaConsumer.run({
       eachMessage: async ({ message, partition, topic }) => handle({ message, partition, topic })
     })
   }
 }
-
-export default new Consumer()
