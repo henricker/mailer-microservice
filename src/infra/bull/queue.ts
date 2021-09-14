@@ -6,7 +6,7 @@ interface IQueueBull{
   bull: Queue<any>; 
   name: string; 
   handle: ({data}: IJobContract<any>) => Promise<Object>
-}[]
+}
 
 export default class QueuesBull {
   
