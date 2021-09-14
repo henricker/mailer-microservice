@@ -1,10 +1,8 @@
-export interface IJobContract<T> {
-  data: {
-    options: T
-  }
+export interface IJobContractDataHandler<T> {
+  data: T
 }
 
-export default abstract class JobContract<T> {
-  constructor(public key: string){}
-  public abstract handle({ data }: IJobContract<T>): Promise<Object>
+export default interface jobContract<T> {
+  key: string
+  handle({ data }: IJobContractDataHandler<T>): Promise<void>
 }
