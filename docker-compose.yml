@@ -24,3 +24,10 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_CREATE_TOPICS: "issue-certificate:1:1,email-handler:1:1"
+    
+  redis:
+    container_name: redis_queue
+    image: 'redis:alpine'
+    restart: always
+    ports: 
+      - "6379:6379"
