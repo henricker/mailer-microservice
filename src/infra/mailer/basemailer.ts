@@ -16,7 +16,7 @@ export default abstract class BaseMailer {
     }))
   }
 
-  abstract prepare(transporter: Transporter): Promise<void>
+  protected abstract prepare(transporter: Transporter): Promise<void>
 
   async send() {
     await this.prepare(this.transporter)
