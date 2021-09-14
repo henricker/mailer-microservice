@@ -1,5 +1,5 @@
-import consumer from './infra/kafka/consumer'
-import SendMailKafkaService from './application/services/send-mail-kafka-service'
+import consumer from '../infra/kafka/consumer'
+import SendMailKafkaService from './services/send-mail-kafka-service'
 
 (async () => {
   const mailService = new SendMailKafkaService()
