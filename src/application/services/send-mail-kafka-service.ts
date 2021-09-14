@@ -20,6 +20,3 @@ export default class SendMailKafkaService implements KafkaService  {
     }
   }
 }
-
-  // testing {"contact":{"name":"henricker","email":"henricker@email.com"},"handleMailer":"welcome-user"}
-  // {"contact":{"name":"Arianna Ebert","email":"henricker@email.com"},"bets":{"totalPrice":"R$ 9,00","arrayBets":[{"game":"Mega-Sena","color":"#01AC66","numbers":"16,35,48,16,60,52"},{"game":"Mega-Sena","color":"#01AC66","numbers":"1,25,30,24,25,10"}]},"template":"new-bet-user"}
