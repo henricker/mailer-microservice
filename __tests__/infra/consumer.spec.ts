@@ -41,7 +41,10 @@ describe('#Consumer', () => {
       jest.spyOn(consumer, 'run').mockImplementation()
       const handle = jest.fn()
       const kafkaConsumer = new Consumer(consumer)
+      jest.spyOn(kafkaConsumer, 'run')
       await kafkaConsumer.run(handle)
+
+      expect(kafkaConsumer.run).toHaveBeenCalledWith(handle)
       expect(consumer.run).toHaveBeenCalled()
     })
   })
