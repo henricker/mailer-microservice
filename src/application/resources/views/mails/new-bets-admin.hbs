@@ -1,0 +1,178 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
+  
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+      font-style: italic;
+      color: #707070;
+  }
+  
+  html, body {
+      width: 100%;
+      background: #F7F7F7 0% 0% no-repeat padding-box;
+      opacity: 1;
+      font-style: italic;
+  }
+  
+  .container {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  header {
+      margin-top: 0.9375rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+  
+      font-weight: 500;
+      margin-bottom: 2rem;
+  }
+  
+  header {
+      border-bottom: 2px solid #EBEBEB;
+  }
+  
+  header .title-left h1 {
+     font-size: 2.75rem;
+     border-bottom: 4px solid #B5C401;
+  }
+  
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  
+  main .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    width: 50%;
+  }
+
+  main .content .table {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  main .content .table, th, td {
+    border: 1px solid black;
+    background-color: #383737;
+    border-collapse: collapse;
+    padding: .5rem;
+  }
+  
+    main .content .table th, td: hover {
+    background-color: red;
+  }
+
+  main .content .price {
+    font-size: .9rem;
+  }
+  
+  main .content .outline-green {
+    border-bottom: 1px solid #B5C401;
+  }
+  
+  main .content p {
+    margin-top: .5rem;
+    font-size: 1.1rem;
+  }
+  
+  main .subcontent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  main .subcontent p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #B5C401;
+  }
+  
+  button {
+    padding: 1rem 2.4rem;
+    color: #B5C401;
+    font-weight: 500;
+    border-radius: .5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    background: #F7F7F7 0% 0% no-repeat padding-box;
+    padding: .8rem 0rem;
+    border-top: 2px solid #EBEBEB;
+    color: #707070;
+    font-style: normal;
+  }
+</style>
+
+<header>
+<div class="titles title-left">
+    <h1>TGL</h1>
+</div>
+</header>
+<div class="container">
+<main>
+  <div class="content">
+      <h2>Hi, <span class="outline-green">{{name}}!</span>.</h2>
+      <p>Here is the <span class="outline-green">daily betting report</span> for today's games</p>
+     <table>
+
+  <table class="table"> 
+    <thead>
+      <tr class="row">
+        <th style="color: #FFF;" scope="row">#</th>
+        <th style="color: #FFF">Game</th>
+        <th style="color: #FFF">Amount of bets</th>
+        <th style="color: #FFF">Sale price per game</th>
+      </tr>
+    </thead>
+  <tbody>
+    {{#each games }}
+      <tr class="row">
+        <th style="color: {{this.color}}" scope="row">{{@index}}</th>
+        <td style="color: {{this.color}}">{{this.game}}</td>
+        <td style="color: {{this.color}}">{{this.amountOfBets}}</td>
+        <td style="color: {{this.color}}">{{this.totalPriceOfGame}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+
+      <h2 class="price">
+        Total sales price <span class="outline-green">{{totalPrice}}</span>
+      </h2>
+  </div>
+  <div class="subcontent">
+      <p>To see more sales details, click below:</p>
+      <a href="https://tgl-bets.com/admin">
+        <button>Admin dashboard -></button>
+      <a/>
+  </div>
+</main>
+  <footer>Copyright 2020 Luby Software</footer>
+</div>
