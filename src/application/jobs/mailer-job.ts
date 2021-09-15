@@ -1,3 +1,4 @@
+
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import JobContract, { IJobContractDataHandler } from "../../infra/bull/jobContract";
 import { mailerOptions } from "../../infra/config/mailer/mailer.config";
