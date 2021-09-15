@@ -36,4 +36,13 @@ describe('#Consumer', () => {
       expect(consumer.subscribe).toHaveBeenCalledWith({ topic: 'kafka-event' })
     })
   })
+  describe('#run', () => {
+    test('must call the run method of consumer when kafkaConsumer call method run', async () => {
+      jest.spyOn(consumer, 'run').mockImplementation()
+      const handle = jest.fn()
+      const kafkaConsumer = new Consumer(consumer)
+      await kafkaConsumer.run(handle)
+      expect(consumer.run).toHaveBeenCalled()
+    })
+  })
 })
