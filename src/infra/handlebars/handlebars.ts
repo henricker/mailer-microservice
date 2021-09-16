@@ -8,8 +8,8 @@ type handlebarsPartials = {
 }
 
 export default class HandlebarsCompilerService {
-  private partialsDirPath: string = resolve(__dirname, '..', 'resources', 'views', 'partials')
-  private templatesPath: string = resolve(__dirname, '..', 'resources', 'views', 'mails')
+  private partialsDirPath: string = resolve(__dirname, '..', '..', 'resources', 'views', 'partials')
+  private templatesPath: string = resolve(__dirname, '..', '..', 'resources', 'views', 'mails')
   constructor(private templateName: string){}
 
   private async getTemplateCompiled(templateName: string) {
