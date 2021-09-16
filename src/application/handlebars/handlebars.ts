@@ -1,7 +1,6 @@
 import handlebars, { partials as partialsType} from 'handlebars'
 import fs from 'fs/promises'
 import { resolve } from 'path'
-import nodemailer from 'nodemailer'
 
 type handlebarsPartials = {
   name: string,
@@ -39,7 +38,7 @@ export default class HandlebarsCompilerService {
     return partialsName
   }
   
-  public async getPartial(partialName: string, partialsArray: handlebarsPartials[]) {
+  private async getPartial(partialName: string, partialsArray: handlebarsPartials[]) {
     const template = (await fs.readdir(this.partialsDirPath)).find(template => template.replace('.hbs', '') === partialName)
     if(!template)
       throw new Error(`Partial ${partialName} not found`)
@@ -51,7 +50,7 @@ export default class HandlebarsCompilerService {
     const subPartialsTemplate = await this.getPartialsFilename(partialSource)
     
     if(!subPartialsTemplate)
-    return
+      return
     
     subPartialsTemplate.forEach(async (partialName) => await this.getPartial(partialName, partialsArray))
   } 
