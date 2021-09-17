@@ -41,7 +41,7 @@
     margin-bottom: 2rem;
   }
 
-  main .content .bets {
+  main .bets {
     margin-top: 1rem;
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@
     width: 60%;
   }
 
-  main .content .bets .bet {
+  main .bets .bet {
     margin-left: 1rem;
     margin-bottom: 1rem;
     display: flex;
@@ -61,19 +61,20 @@
     padding: .5rem;
   }
 
-  main .content .bets .bet h2 {
+  main .bets .bet h2 {
     font-size: 1rem;
   }
 
-  main .content .bets .bet p {
+  main .bets .bet p {
     font-size: .7rem;
   }
 
-  main .content .price {
+  main .price {
     font-size: .9rem;
+    margin-bottom: 2rem;
   }
   
-  main .content .outline-green {
+  .outline-green {
     border-bottom: 1px solid #B5C401;
   }
   
@@ -92,7 +93,7 @@
   main .subcontent p {
     font-size: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #B5C401;
+    /*border-bottom: 1px solid #B5C401;*/
   }
   
   button {
@@ -113,18 +114,18 @@
   <div class="content">
       <h2>Hi, <span class="outline-green">{{ name }}!</span>.</h2>
       <p>The <span class="outline-green">bets</span> you made on our platform are below:</p>
-      <div class="bets">
-        {{#each bets }}
-          <div class="bet" style="border: 1px solid {{this.color}}">
-            <h2 style="color: {{this.color}}">{{this.game}}</h2>
-            <p>{{this.numbers}}</p>
-          </div>
-        {{/each}}
-      </div>
-      <h2 class="price">Total price: <span class="outline-green">{{totalPrice}}</span></h2>
   </div>
+  <div class="bets">
+    {{#each bets }}
+      <div class="bet" style="border: 1px solid {{this.color}}">
+        <h2 style="color: {{this.color}}">{{this.game}}</h2>
+        <p>{{this.numbers}}</p>
+      </div>
+    {{/each}}
+  </div>
+  <h2 class="price">Total price: <span class="outline-green">{{totalPrice}}</span></h2>
   <div class="subcontent">
-      <p>Click bellow to place new bets, good luck! ;)</p>
+      <p class="outline-green">Click bellow to place new bets, good luck! ;)</p>
       <a href="https://tgl-bets.com/dashboard">
         <button>New bets -></button>
       <a/>
