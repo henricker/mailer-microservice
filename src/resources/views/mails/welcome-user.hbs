@@ -1,93 +1,49 @@
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
+  main .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-style: italic;
-    color: #707070;
-}
+  .outline-green {
+    border-bottom: 1px solid #B5C401;
+  }
 
-html, body {
-    width: 100%;
-    background: #F7F7F7 0% 0% no-repeat padding-box;
-    opacity: 1;
-    font-style: italic;
-}
+  main .content p {
+    margin-top: .5rem;
+    font-size: 1.1rem;
+  }
 
-.container {
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-}
+  main .subcontent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
-main {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  height: 100%;
-}
-
-main .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-main .content .outline-green {
-  border-bottom: 1px solid #B5C401;
-}
-
-main .content p {
-  margin-top: .5rem;
-  font-size: 1.1rem;
-}
-
-main .subcontent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-main .subcontent p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #B5C401;
-}
-
-button {
-  padding: 1rem 2.4rem;
-  color: #B5C401;
-  font-weight: 500;
-  border-radius: .5rem;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
+  main .subcontent p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
 </style>
 
 {{> header }} 
-<div class="container">
-<main>
-<div class="content">
-    <h2>Welcome to TGL bets, <span class="outline-green">{{ name }}!!</span></h2>
-    <p>Now you have the <span class="outline-green">freedom</span> to bet as many times as you like!.</p>
-</div>
-<div class="subcontent">
-    <p>
-      Click below to login to your account and start betting ;)</p>
-    <a href="https://tgl-bets.com/login">
-      <button>Make bets -></button>
-    <a/>
-</div>
-</main>
-  {{> footer }} 
-</div>
+{{#> container }}
+  {{#> main }}
+    <div class="content">
+        <h2>Welcome to TGL bets, <span class="outline-green">{{ name }}!!</span></h2>
+        <p>Now you have the <span class="outline-green">freedom</span> to bet as many times as you like!.</p>
+    </div>
+    <div class="subcontent">
+        <p class="outline-green">
+          Click below to login to your account and start betting ;)</p>
+        <a href="https://tgl-bets.com/login">
+          {{> button text="Make bets" }}
+        <a/>
+    </div>
+    {{> subcontent text="Click below to login to your account and start betting ;)" link="https://tgl-bets.com/login" button-text="Make bets!" }}
+  {{/main}}
+    {{> footer }} 
+{{/container }}
