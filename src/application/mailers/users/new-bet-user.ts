@@ -10,7 +10,7 @@ export default class NewBetUserMailer extends BaseMailer {
   }
 
   async prepare(transporter: Transporter): Promise<void> {
-    const hbs = new HandlebarsCompilerService('new-bet-user.hbs')
+    const hbs = new HandlebarsCompilerService('new-bet-user')
     const html = await hbs.compile({
       name: this.payload.contact.name,
       bets: this.payload.bets!.arrayBets,
