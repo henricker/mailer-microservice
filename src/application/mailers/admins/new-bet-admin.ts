@@ -10,7 +10,6 @@ export default class NewBetAdminMailer extends BaseMailer {
   }
 
   async prepare(transporter: Transporter): Promise<void> {
-
     const hbs = new HandlebarsCompilerService('new-bets-admin')
     const html = await hbs.compile({
       name: this.payload.contact.name,

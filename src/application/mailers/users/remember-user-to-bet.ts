@@ -10,7 +10,6 @@ export default class RememberUserToBetMailer extends BaseMailer {
   }
 
   async prepare(transporter: Transporter): Promise<void> {
-
     const hbs = new HandlebarsCompilerService('remember-user-to-bet')
     const html = await hbs.compile({
       name: this.payload.contact.name
