@@ -10,7 +10,7 @@ export default class WelcomeUserMailer extends BaseMailer {
   }
 
   async prepare(transporter: Transporter): Promise<void> {
-    const hbs = new HandlebarsCompilerService('remember-user-to-bet.hbs')
+    const hbs = new HandlebarsCompilerService('welcome-user')
     const html = await hbs.compile({
       name: this.payload.contact.name
     })
