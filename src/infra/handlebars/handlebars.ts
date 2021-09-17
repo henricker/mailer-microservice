@@ -33,9 +33,10 @@ export default class HandlebarsCompilerService {
 
   
   private async getPartialsFilename(templateSource: string) {
-    const partialsOnTemplate = templateSource.match(new RegExp(/{{> [a-z]+ }}/g))
-    const partialsName = partialsOnTemplate?.map(partial => partial.replace('{{>', '').replace('}}', '').trim())
-    return partialsName
+    const partialsOnTemplate = templateSource.match(new RegExp(/{{#?>.+}}/g))
+    const partialsName = partialsOnTemplate?.map(partial => partial.replace(/{{#?>/, '').replace('}}', '').trim())
+    const partials = partialsName?.map((partialName) => partialName.split(' ')[0])
+    return partials?.filter(partialName => partialName !== '@partial-block')
   }
   
   private async getPartial(partialName: string, partialsArray: handlebarsPartials[]) {
@@ -70,3 +71,9 @@ export default class HandlebarsCompilerService {
     return html
   }
 }
+
+// (async () => {
+//   const hbs = new HandlebarsCompilerService('welcome-user')
+//   const html = await hbs.compile({name: 'henricker'})
+//   console.log(html)
+// })()
