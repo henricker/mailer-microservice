@@ -71,9 +71,3 @@ export default class HandlebarsCompilerService {
     return html
   }
 }
-
-// (async () => {
-//   const hbs = new HandlebarsCompilerService('welcome-user')
-//   const html = await hbs.compile({name: 'henricker'})
-//   console.log(html)
-// })()
