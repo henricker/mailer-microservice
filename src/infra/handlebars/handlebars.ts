@@ -14,12 +14,14 @@ export default class HandlebarsCompilerService {
 
   private async getTemplateCompiled(templateName: string) {
     const template = (await fs.readdir(this.templatesPath)).find(template => template.replace('.hbs', '') === templateName)
+    
     if(!template)
       throw new Error('template not found')
     
     const templateSource = (await fs.readFile(resolve(this.templatesPath, template))).toString()
     const partialsName = await this.getPartialsFilename(templateSource)
     const partialsCompiledsArray: handlebarsPartials[] = []
+    
     if(partialsName)
       for await (let partial of partialsName)
         await this.getPartial(partial, partialsCompiledsArray)
@@ -41,6 +43,7 @@ export default class HandlebarsCompilerService {
   
   private async getPartial(partialName: string, partialsArray: handlebarsPartials[]) {
     const template = (await fs.readdir(this.partialsDirPath)).find(template => template.replace('.hbs', '') === partialName)
+    
     if(!template)
       throw new Error(`Partial ${partialName} not found`)
     
