@@ -21,7 +21,7 @@ export default class NewBetAdminMailer extends BaseMailer {
     await transporter.sendMail({
       from: 'TGL BETS 🍀 <tgl@suport.com>',
       to: this.payload.contact.email,
-      subject: 'Bets placed!',
+      subject: 'Daily reports',
       html
     })
   }

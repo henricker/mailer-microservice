@@ -19,7 +19,7 @@ export default class RememberUserToBetMailer extends BaseMailer {
     await transporter.sendMail({
       from: 'TGL BETS 🍀 <tgl@suport.com>',
       to: this.payload.contact.email,
-      subject: 'Place a bet! :D',
+      subject: "We're missing you :(",
       html
     })
   }
