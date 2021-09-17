@@ -1,44 +1,10 @@
-<style>
-  main .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
-
-  main .content p {
-    margin-top: .5rem;
-    font-size: 1.1rem;
-  }
-
-  main .subcontent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  main .subcontent p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-</style>
-
 {{> header }} 
 {{#> container }}
   {{#> main }}
-    <div class="content">
+    {{#> content }}
         <h2>Welcome to TGL bets, <span class="outline-green">{{ name }}!!</span></h2>
         <p>Now you have the <span class="outline-green">freedom</span> to bet as many times as you like!.</p>
-    </div>
-    <div class="subcontent">
-        <p class="outline-green">
-          Click below to login to your account and start betting ;)</p>
-        <a href="https://tgl-bets.com/login">
-          {{> button text="Make bets" }}
-        <a/>
-    </div>
+    {{/content}}
     {{> subcontent text="Click below to login to your account and start betting ;)" link="https://tgl-bets.com/login" button-text="Make bets!" }}
   {{/main}}
     {{> footer }} 

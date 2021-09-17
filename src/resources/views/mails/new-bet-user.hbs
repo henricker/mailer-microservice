@@ -1,14 +1,5 @@
 <style>
-  main .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 2rem;
-  }
-
-  main .bets {
-    margin-top: 1rem;
+  .bets {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -17,7 +8,7 @@
     width: 60%;
   }
 
-  main .bets .bet {
+  .bets .bet {
     margin-left: 1rem;
     margin-bottom: 1rem;
     display: flex;
@@ -27,33 +18,26 @@
     padding: .5rem;
   }
 
-  main .bets .bet h2 {
+  .bets .bet h2 {
     font-size: 1rem;
   }
 
-  main .bets .bet p {
+  .bets .bet p {
     font-size: .7rem;
   }
 
-  main .price {
+  .price {
     font-size: .9rem;
     margin-bottom: 2rem;
   }
-  
-  main .content p {
-    margin-top: .5rem;
-    font-size: 1.1rem;
-  }
 </style>
-
-
 {{> header }}
 {{#> container }} 
   {{#> main }}
-    <div class="content">
+    {{#> content }}
         <h2>Hi, <span class="outline-green">{{ name }}!</span>.</h2>
         <p>The <span class="outline-green">bets</span> you made on our platform are below:</p>
-    </div>
+    {{/content }}
     <div class="bets">
       {{#each bets }}
         <div class="bet" style="border: 1px solid {{this.color}}">

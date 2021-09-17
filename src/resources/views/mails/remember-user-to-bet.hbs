@@ -1,25 +1,10 @@
-<style>
-  main .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 4rem;
-  }
-  
-  main .content p {
-    margin-top: .5rem;
-    font-size: 1.1rem;
-  }  
-</style>
-
 {{> header }}
 {{#> container }}
   {{#> main }}
-    <div class="content">
+    {{#> content}}
         <h2>Hi, <span class="outline-green">{{ name }}</span>. We're missing you :(</h2>
         <p>Take advantage of today's beautiful day to place <span class="outline-green">new bets!</span>.</p>
-    </div>
+    {{/content}}
     {{> subcontent text="Click below to place new bets! :D" link="https://tgl-bets.com/dashboard" button-text="Make bets!" }}
   {{/main}}
   {{> footer }}
