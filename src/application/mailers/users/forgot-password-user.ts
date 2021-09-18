@@ -1,6 +1,6 @@
 import { Transporter } from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-import BaseMailer from "../../../infra/mailer/basemailer";
+import BaseMailer from "../../../infra/mailer/base-mailer";
 import IPayloadMailer from "../interfaces/IPayloadMailer";
 import HandlebarsCompilerService from "../../../infra/handlebars/handlebars";
 
