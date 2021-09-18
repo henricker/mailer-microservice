@@ -43,7 +43,7 @@ export default class HandlebarsCompilerService {
   
   private async getPartial(partialName: string, partialsArray: handlebarsPartials[]) {
     const template = (await fs.readdir(this.partialsDirPath)).find(template => template.replace('.hbs', '') === partialName)
-    
+
     if(!template)
       throw new Error(`Partial ${partialName} not found`)
     

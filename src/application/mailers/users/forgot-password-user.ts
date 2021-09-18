@@ -5,7 +5,7 @@ import IPayloadMailer from "../interfaces/IPayloadMailer";
 import HandlebarsCompilerService from "../../../infra/handlebars/handlebars";
 
 export default class ForgotPasswordUserMailer extends BaseMailer {
-  constructor(authConfig: SMTPTransport.Options, private payload: IPayloadMailer) {    
+  constructor(authConfig: SMTPTransport.Options, private payload: IPayloadMailer) {
     super(authConfig)
   }
 
