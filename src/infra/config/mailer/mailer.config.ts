@@ -4,9 +4,9 @@ import env from '../../../../env'
 export const mailerOptions: SMTPTransport.Options = {
   host: env.ENV_MAILER_HOST,
   port: Number(env.ENV_MAILER_PORT),
-  secure: Boolean(env.ENV_MAILER_SECURE),
+  secure: false,
   auth: {
-    user: env.ENV_MAILER_AUTH_PASS,
+    user: env.ENV_MAILER_AUTH_USER,
     pass: env.ENV_MAILER_AUTH_PASS,
   },
 }
