@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "start": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/",
     "queue": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/queue.ts"
   },
