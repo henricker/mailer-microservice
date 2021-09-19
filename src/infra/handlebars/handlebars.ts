@@ -15,7 +15,7 @@ export default class HandlebarsCompilerService {
   constructor(private templateName: string){}
 
   private async getTemplateCompiled(templateName: string) {
-    let template = await this.existsTemplate(templateName, this.templatesPath)
+    const template = await this.existsTemplate(templateName, this.templatesPath)
 
     if(!template)
       throw new Error('template not found')
