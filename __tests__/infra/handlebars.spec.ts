@@ -136,13 +136,227 @@ describe('#HandlebarsCompilerService', () => {
     })
   })
   describe('#compileTemplate', () => {
-    
     afterEach(() => {
       jest.restoreAllMocks()
     })
+    test('should be return a template compiled by handlebars and partials name', async () => {
+      const template = `
+        {{#> container }}
+          {{> text description="hello" }}
+        {{/container}}
+      `
 
-    test.todo('should be return a template compiled by handlebars and partials name')
-    test.todo('should be return a template compiled without partials')
-    test.todo('should be return undefined to template and partials case template not exists')
+      const hbs = new HandlebarsCompilerService('template')
+
+      jest.spyOn(fs, 'readFile').mockResolvedValue(Buffer.from(template))
+
+      const { templateCompiled, partialsName } = await hbs['compileTemplate']('', '')
+      
+      expect(typeof templateCompiled).toBe('function')
+      expect(partialsName).toStrictEqual(['container', 'text'])
+    })
+    test('should be return a template compiled without partials', async () => {
+      const template = `
+        <div>
+          <p>hello baby</p>
+        </div>
+      `
+
+      const hbs = new HandlebarsCompilerService('template')
+
+      jest.spyOn(fs, 'readFile').mockResolvedValue(Buffer.from(template))
+
+      const { templateCompiled, partialsName } = await hbs['compileTemplate']('', '')
+      
+      expect(typeof templateCompiled).toBe('function')
+      expect(partialsName).toStrictEqual(undefined)
+    })
+    test('should be return error when template not found', async () => {
+      const hbs = new HandlebarsCompilerService('template')
+
+      try {
+        const { templateCompiled, partialsName } = await hbs['compileTemplate']('', '')
+      } catch(err) {
+        err instanceof Error ? expect(err).toBeInstanceOf(Error) : ''
+      }
+    })
+  })
+  describe('#getTemplateCompiled', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+    test('Must return the template with its partials', async () => {
+      const template = `
+        {{#> container }}
+          {{> header }}
+            <main>
+              {{> text description="hello ma baby" }}
+            </main>
+          {{> footer }}
+        {{/container}}
+      `
+
+      const containerPartial = `
+        <div class="container">
+          {{> @partial-block }}
+        </div>
+      `
+
+      const headerPartial = `
+        <header>
+          <h2>Welcome to my heart</h2>
+        </header>
+      `
+
+      const footerPartial = `
+        <footer>
+          <p>by henricker <3</p>
+        </footer>
+      `
+
+      const textPartial = `
+        <p>{{description}}</p>
+      `
+
+      const direntTemplate = new Dirent()
+      direntTemplate.name = 'template'
+
+      const direntContainerPartial = new Dirent()
+      direntContainerPartial.name = 'container'
+
+      const direntHeaderPartial = new Dirent()
+      direntHeaderPartial.name = 'header'
+
+      const direntTextPartial = new Dirent()
+      direntTextPartial.name = 'text'
+
+      const direntFooterPartial = new Dirent()
+      direntFooterPartial.name = 'footer'
+
+      const dirents = [direntTemplate, direntContainerPartial, direntHeaderPartial, direntTextPartial, direntFooterPartial]
+
+      jest.spyOn(fs, 'readdir').mockResolvedValue(dirents)
+
+      jest.spyOn(fs, 'readFile')
+        .mockResolvedValueOnce(Buffer.from(template))
+        .mockResolvedValueOnce(Buffer.from(containerPartial))
+        .mockResolvedValueOnce(Buffer.from(headerPartial))
+        .mockResolvedValueOnce(Buffer.from(textPartial))
+        .mockResolvedValueOnce(Buffer.from(footerPartial))
+ 
+      const hbs = new HandlebarsCompilerService('template')
+      const { templateCompiled, partials } = await hbs['getTemplateCompiled']('template')
+      const partialsName = ['container', 'header', 'text', 'footer']
+      expect(typeof templateCompiled).toBe('function')
+      expect(partials).toHaveLength(4)
+      partials?.forEach((partial, index) => {
+        expect(partial.name).toBe(partialsName[index])
+        expect(typeof partial.template).toBe('function')
+      })
+    })
+    test('Must return the model and undefined partials when the model has no partials', async () => {
+      const template = `
+        <div>
+          <header>
+            <p>random title</p>
+          </header>  
+          <main>
+            <p>hello ma baby</p>
+          </main>
+          <footer>
+            <p>ma footer bro</p>
+          </footer>
+        </div>
+      `
+
+      const direntTemplate = new Dirent()
+      direntTemplate.name = 'template'
+
+      const dirents = [direntTemplate]
+
+      jest.spyOn(fs, 'readdir').mockResolvedValue(dirents)
+
+      jest.spyOn(fs, 'readFile')
+        .mockResolvedValueOnce(Buffer.from(template))
+
+      const hbs = new HandlebarsCompilerService('template')
+      const { templateCompiled, partials } = await hbs['getTemplateCompiled']('template')
+      expect(typeof templateCompiled).toBe('function')
+      expect(partials).toBe(undefined)
+    })
+    test('Must return error when template not exists', async () => {
+      try {
+        const hbs = new HandlebarsCompilerService('template')
+        await hbs['getTemplateCompiled']('template')
+      } catch(err) {
+        err instanceof Error ? expect(err.message).toBe('template not found') : ''
+      }
+    })
+  })
+  describe('#compile', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+    test('should return hmtl compiled', async () => {
+      const template = `
+      {{#> container }}
+        {{> header }}
+        <main>
+          {{> text description="hello ma baby" }}
+        </main>
+        {{> footer }}
+      {{/container}}`
+
+      const containerPartial = `<div class="container">{{> @partial-block }}</div>`
+
+      const headerPartial = `<header><h2>Welcome to my heart</h2></header>`
+
+      const footerPartial = `<footer><p>by henricker <3</p></footer>`
+
+      const textPartial = `<p>{{description}}</p>`
+
+      const direntTemplate = new Dirent()
+      direntTemplate.name = 'template'
+
+      const direntContainerPartial = new Dirent()
+      direntContainerPartial.name = 'container'
+
+      const direntHeaderPartial = new Dirent()
+      direntHeaderPartial.name = 'header'
+
+      const direntTextPartial = new Dirent()
+      direntTextPartial.name = 'text'
+
+      const direntFooterPartial = new Dirent()
+      direntFooterPartial.name = 'footer'
+
+      const dirents = [direntTemplate, direntContainerPartial, direntHeaderPartial, direntTextPartial, direntFooterPartial]
+
+      jest.spyOn(fs, 'readdir').mockResolvedValue(dirents)
+
+      jest.spyOn(fs, 'readFile')
+        .mockResolvedValueOnce(Buffer.from(template))
+        .mockResolvedValueOnce(Buffer.from(containerPartial))
+        .mockResolvedValueOnce(Buffer.from(headerPartial))
+        .mockResolvedValueOnce(Buffer.from(textPartial))
+        .mockResolvedValueOnce(Buffer.from(footerPartial))
+ 
+      const hbs = new HandlebarsCompilerService('template')
+      const html = await hbs.compile({})
+
+      expect(typeof html).toBe('string')
+      expect(html.includes('<div class="container">')).toBe(true)
+      expect(html.includes('<header><h2>Welcome to my heart</h2></header>')).toBe(true)
+      expect(html.includes('<p>hello ma baby</p>')).toBe(true)
+      expect(html.includes('<footer><p>by henricker <3</p></footer')).toBe(true)
+    })
+    test('should return error when template not exists on path of templates', async () => {
+      try {
+        const hbs = new HandlebarsCompilerService('template')
+        await hbs.compile({})
+      } catch(err) {
+        err instanceof Error ? expect(err.message).toBe('template not found') : ''
+      }
+    })
   })
 })
