@@ -23,6 +23,10 @@ class MailerTesting extends BaseMailer {
 
 describe('#Any email that inherits from BaseMailer', () => {
 
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
   let accountTesting: nodemailer.TestAccount
   let transporter: nodemailer.Transporter<any>
   

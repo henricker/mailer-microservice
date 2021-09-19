@@ -30,6 +30,11 @@ describe('#BaseMailer', () => {
   })
 
   describe('#Send', () => {
+    
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
     test('should call method prepare when send method is called', async () => {
       const mailer = new MailerTesting({})
       jest.spyOn(mailer, 'send')

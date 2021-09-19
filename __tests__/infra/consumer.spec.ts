@@ -4,6 +4,10 @@ import kafka from '../../src/infra/kafka/kafka'
 describe('#Consumer', () => {
   const consumer = kafka.consumer({ groupId: 'sadasdas'} )
   describe('#connect', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
     test('should be called connect method of kafkaConsumer', async () => {
       jest.spyOn(consumer, 'connect').mockImplementation()
       const kafkaConsumer = new Consumer(consumer)
@@ -13,6 +17,9 @@ describe('#Consumer', () => {
     })
   })
   describe('#disconnect', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
     test('should be called disconnect method of kafkaConsumer', async () => {
       jest.spyOn(consumer, 'disconnect').mockImplementation()
       const kafkaConsumer = new Consumer(consumer)
@@ -22,6 +29,9 @@ describe('#Consumer', () => {
     })
   })
   describe('#subscribe', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
     test('must call the subscribe method three times when three topics are approved.', async () => {
       jest.spyOn(consumer, 'subscribe').mockImplementation()
       const kafkaConsumer = new Consumer(consumer)
@@ -37,6 +47,9 @@ describe('#Consumer', () => {
     })
   })
   describe('#run', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
     test('must call the run method of consumer when kafkaConsumer call method run', async () => {
       jest.spyOn(consumer, 'run').mockImplementation()
       const handle = jest.fn()
