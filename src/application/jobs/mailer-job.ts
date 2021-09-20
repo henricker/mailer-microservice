@@ -20,7 +20,7 @@ export default class MailerJob implements JobContract<IMailerJobContractData> {
       const mailer = new mailerClass(mailerOptions, payload)
       await mailer.send()
     } catch(err) {
-      err instanceof Error ? console.log(err.message): console.log(err)
+      throw err
     }
   }
 }
