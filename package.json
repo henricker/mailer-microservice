@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --watchAll --detectOpenHandles",
     "start": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/",
     "queue": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/queue.ts"
   },
