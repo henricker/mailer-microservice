@@ -1,5 +1,14 @@
-import Consumer from '../../src/infra/kafka/consumer'
-import kafka from '../../src/infra/kafka/kafka'
+import { EachMessagePayload } from 'kafkajs'
+import Consumer from '../../../src/infra/kafka/consumer'
+import kafka from '../../../src/infra/kafka/kafka'
+import KafkaService from '../../../src/infra/kafka/service-kafka'
+
+class TestingKafkaService implements KafkaService  {
+  public topic = 'event'
+  async handler(payloadTopic: EachMessagePayload): Promise<void> {
+    console.log('hello')
+  }
+}
 
 describe('#Consumer', () => {
   const consumer = kafka.consumer({ groupId: 'sadasdas'} )
@@ -52,12 +61,12 @@ describe('#Consumer', () => {
     })
     test('must call the run method of consumer when kafkaConsumer call method run', async () => {
       jest.spyOn(consumer, 'run').mockImplementation()
-      const handle = jest.fn()
+      const testingService = new TestingKafkaService()
       const kafkaConsumer = new Consumer(consumer)
       jest.spyOn(kafkaConsumer, 'run')
-      await kafkaConsumer.run(handle)
+      await kafkaConsumer.run(testingService)
 
-      expect(kafkaConsumer.run).toHaveBeenCalledWith(handle)
+      expect(kafkaConsumer.run).toHaveBeenCalledWith(testingService)
       expect(consumer.run).toHaveBeenCalled()
     })
   })

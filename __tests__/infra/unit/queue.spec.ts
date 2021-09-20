@@ -1,7 +1,7 @@
 import Bull from "bull"
 import { setTimeout } from "timers/promises"
-import jobContract, { IJobContractDataHandler } from "../../src/infra/bull/jobContract"
-import QueuesBull from "../../src/infra/bull/queue"
+import jobContract, { IJobContractDataHandler } from "../../../src/infra/bull/jobContract"
+import QueuesBull from "../../../src/infra/bull/queue"
 
 interface dataTesting {
   name: string,
@@ -11,7 +11,6 @@ interface dataTesting {
 class JobTesting implements jobContract<dataTesting> {
   public key = 'testing-job'
   async handle({ data }: IJobContractDataHandler<dataTesting>): Promise<void> {
-    await setTimeout(100)
     console.log('AAAAAAAAAAAAI PAPAI')
   }
 }

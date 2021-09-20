@@ -1,7 +1,7 @@
 import nodemailer, { createTestAccount, createTransport } from "nodemailer"
 import SMTPTransport from "nodemailer/lib/smtp-transport"
 import { setTimeout } from "timers/promises"
-import BaseMailer from "../../src/infra/mailer/base-mailer"
+import BaseMailer from "../../../src/infra/mailer/base-mailer"
 
 
 describe('#BaseMailer', () => {

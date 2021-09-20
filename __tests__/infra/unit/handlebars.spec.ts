@@ -1,6 +1,6 @@
 import { Dirent } from 'fs'
 import fs from 'fs/promises'
-import HandlebarsCompilerService from "../../src/infra/handlebars/handlebars"
+import HandlebarsCompilerService from "../../../src/infra/handlebars/handlebars"
 
 describe('#HandlebarsCompilerService', () => {
   describe('#getPartialsFilename', () => {
