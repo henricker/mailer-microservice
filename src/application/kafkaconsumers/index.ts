@@ -1,0 +1,1 @@
+export { default as sendMailKafkaService } from './send-mail-kafka-service'
