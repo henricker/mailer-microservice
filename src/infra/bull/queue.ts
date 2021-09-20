@@ -10,7 +10,7 @@ interface IQueueBull{
 
 export default class QueuesBull {
   
-  public queues: IQueueBull[]
+  private queues: IQueueBull[]
   
   constructor(jobs: JobContract<any>[]){
     this.queues = jobs.map(job => ({
@@ -22,6 +22,10 @@ export default class QueuesBull {
 
   public add(name: string, data: any) {
     const queue = this.queues.find(queue => queue.name === name)
+
+    if(!queue)
+      throw new Error('queue not found')
+
     return queue?.bull.add(data, { 
       attempts: 5, 
       removeOnComplete: true, 
