@@ -1,4 +1,5 @@
-import { Consumer as KafkaConsumer, ConsumerSubscribeTopic, Message } from 'kafkajs'
+import { Consumer as KafkaConsumer, ConsumerSubscribeTopic } from 'kafkajs'
+import KafkaService from './service-kafka'
 
 export default class Consumer {
 
@@ -16,9 +17,14 @@ export default class Consumer {
     topics.forEach(async (options) => await this.kafkaConsumer.subscribe({ ...options  }))
   }
 
-  async run(handle: Function) {
+  async run(service: KafkaService) {
     await this.kafkaConsumer.run({
-      eachMessage: async ({ message, partition, topic }) => handle({ message, partition, topic })
+      eachMessage: async ({ message, partition, topic }) => {
+        if(topic !== service.topic)
+          return
+          
+        service.handler({ message, partition, topic })
+      }
     })
   }
 }
