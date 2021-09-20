@@ -10,7 +10,13 @@ export default class ForgotPasswordUserMailer extends BaseMailer {
   }
 
   async prepare(transporter: Transporter): Promise<void> {
-    const hbs = new HandlebarsCompilerService('forgot-password')
+    if(!this.payload.contact || !this.payload.contact.name || !this.payload.contact.email)
+      throw new Error('invalid contact')
+
+    if(!this.payload.contact.remember_me_token)
+      throw new Error('contact not have remember_me_token')
+
+    const hbs = new HandlebarsCompilerService(this.payload.template)
     const html = await hbs.compile({
       name: this.payload.contact.name,
       token: this.payload.contact.remember_me_token

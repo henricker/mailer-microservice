@@ -10,7 +10,14 @@ export default class WelcomeUserMailer extends BaseMailer {
   }
 
   async prepare(transporter: Transporter): Promise<void> {
-    const hbs = new HandlebarsCompilerService('welcome-user')
+
+    if(!this.payload)
+      throw new Error('invalid payload')
+
+    if(!this.payload.contact || !this.payload.contact.name || !this.payload.contact.email)
+      throw new Error('invalid contact')
+    
+    const hbs = new HandlebarsCompilerService(this.payload.template)
     const html = await hbs.compile({
       name: this.payload.contact.name
     })
