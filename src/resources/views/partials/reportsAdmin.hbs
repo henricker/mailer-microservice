@@ -1,0 +1,56 @@
+<style>
+  .table {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .table, th, td {
+    border: 1px solid black;
+    background-color: #383737;
+    border-collapse: collapse;
+    padding: .5rem;
+  }
+  
+  .table th, td: hover {
+    background-color: red;
+  }
+
+  .price {
+    font-size: .9rem;
+  }
+</style>
+{{> header }}
+{{#> container }}
+  {{#> main }}
+    {{#> content }}
+      <h2>Hi, <span class="outline-green">{{name}}!</span>.</h2>
+      <p>Here is the <span class="outline-green">{{type}} betting report</span> for today's games</p>
+      <table class="table"> 
+        <thead>
+          <tr class="row">
+            <th style="color: #FFF;" scope="row">#</th>
+            <th style="color: #FFF">Game</th>
+            <th style="color: #FFF">Amount of bets</th>
+            <th style="color: #FFF">Sale price per game</th>
+          </tr>
+        </thead>
+      <tbody>
+        {{#each games }}
+          <tr class="row">
+            <th style="color: {{this.color}}" scope="row">{{@index}}</th>
+            <td style="color: {{this.color}}">{{this.game}}</td>
+            <td style="color: {{this.color}}">{{this.amountOfBets}}</td>
+            <td style="color: {{this.color}}">{{this.totalPriceOfGame}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+      <h2 class="price">
+        Total sales price <span class="outline-green">{{totalPrice}}</span>
+      </h2>
+    {{/content}}
+    {{> subcontent text="To see more sales details, click below:" link="https://tgl-bets.com/admin" button-text="Admin dashboard" }}
+  {{/main}}
+  {{> footer }}
+{{/container }}
