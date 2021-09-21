@@ -5,6 +5,7 @@ import IBet from "../../models/bet";
 
 export default interface IPayloadMailer {
   contact: IContact,
+  username?: string
   games?: {
     totalPrice: number,
     gamesRelatory: IGame[]
@@ -14,5 +15,4 @@ export default interface IPayloadMailer {
     arrayBets: IBet[]
   }
   template: keyof typeof mailers
-  kind: 'IPayloadMailerAdmin'
 }
