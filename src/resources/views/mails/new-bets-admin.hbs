@@ -1,0 +1,53 @@
+<style>
+  .bets {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60%;
+  }
+
+  .bets .bet {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+  }
+
+  .bets .bet h2 {
+    font-size: 1rem;
+  }
+
+  .bets .bet p {
+    font-size: .7rem;
+  }
+
+  .price {
+    font-size: .9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+{{> header }}
+{{#> container }} 
+  {{#> main }}
+    {{#> content }}
+        <h2>Hi, <span class="outline-green">{{ name }}!</span>.</h2>
+        <p> A user has placed a new <span class="outline-green">bets</span>, below you can see the bets and the purchase amount of the {{username}}:</p>
+    {{/content }}
+    <div class="bets">
+      {{#each bets }}
+        <div class="bet" style="border: 1px solid {{this.color}}">
+          <h2 style="color: {{this.color}}">{{this.game}}</h2>
+          <p>{{this.numbers}}</p>
+        </div>
+      {{/each}}
+    </div>
+    <h2 class="price">Total price: <span class="outline-green">{{totalPrice}}</span></h2>
+    {{> subcontent text="Click below to view other users' bets and access their reports! ;)" link="https://tgl-bets.com/admin" button-text="Admin dashboard" }}
+  {{/main }}
+  {{> footer }}
+{{/container}}
