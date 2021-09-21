@@ -5,10 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
+    "build": "tsc && cp package.json ./build && cp .env ./build",
     "dev": "npm-run-all -p dev:*",
     "dev:kafka": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/kafka.ts",
     "dev:queue": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/queue.ts",
-    "dev:express": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/express.ts"
+    "dev:express": "ts-node-dev --ignore-watch node_modules --transpile-only src/application/express.ts",
+    "start": "npm-run-all -p start:*",
+    "start:kafka": "node src/application/kafka.js",
+    "start:queue": "node src/application/queue.js",
+    "start:express":"node src/application/express.js"
   },
   "keywords": [],
   "author": "",
