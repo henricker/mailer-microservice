@@ -1,5 +1,5 @@
 
-version: "2"
+version: "3"
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -13,7 +13,7 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 9092:9092
+      - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -31,3 +31,27 @@ services:
     restart: always
     ports: 
       - "6379:6379"
+
+  # ms-mail-kafka:
+  #   container_name: ms-mail-kafka
+  #   build: .
+  #   depends_on: 
+  #     - kafka
+  #   command: npm run start:kafka
+
+  # ms-mail-queue:
+  #   container_name: ms-mail-queue
+  #   build: .
+  #   depends_on: 
+  #     - redis
+  #   command: npm run start:queue
+
+  # ms-mail-express:
+  #   container_name: ms-mail-express
+  #   build: .
+  #   depends_on: 
+  #     - ms-mail-queue
+  #     - ms-mail-kafka
+  #   ports: 
+  #     - "3030:3030"
+  #   command: npm run start:express
